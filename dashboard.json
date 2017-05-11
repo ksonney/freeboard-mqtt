@@ -1,0 +1,198 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [
+	],
+	"panes": [
+		{
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 1
+			},
+			"col": {
+				"2": 2,
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Thermopile Sensor",
+						"value": "if (datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"sensor_type\"] == \"thermopile\") {\n\n    thermopile_remote = parseInt(datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"response\"][\"result\"][\"object\"], 16);\n\n    // Raw data divided by 128 is the Celsius temperature value\n    return parseFloat(thermopile_remote / 128.0).toFixed(2);\n}",
+						"include_legend": true,
+						"legend": "Temperature"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Lux Meter",
+						"value": "if (datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"sensor_type\"] == \"lux\") {\n    ch0 = parseInt(datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"response\"][\"result\"][\"AmbientIR\"], 16);\n    ch1 = parseInt(datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"response\"][\"result\"][\"IR\"], 16);\n    \n    atime = 400.0  // 400 ms\n    again = 25.0   // gain = 25\n    TSL2591_LUX_DF = 408.0\n    TSL2591_LUX_COEFB = 1.64\n    TSL2591_LUX_COEFC = 0.59\n    TSL2591_LUX_COEFD = 0.86\n\n    cpl = (atime*again)/TSL2591_LUX_DF\n\n   \n    lux1 = (ch0-(TSL2591_LUX_COEFB * ch1))/cpl\n    lux2 = (TSL2591_LUX_COEFC*ch0 - TSL2591_LUX_COEFD*ch1)/cpl\n\n    if (lux1 != NaN && lux2 != NaN){\n        if (lux1 > lux2) return parseFloat(lux1).toFixed(2)\n        else return parseFloat(lux2).toFixed(2)        \n    }\n}",
+						"include_legend": true,
+						"legend": "lux"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 8,
+				"3": 1,
+				"4": 8
+			},
+			"col": {
+				"2": 1,
+				"3": 3,
+				"4": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "Ultrasound Sensor 1",
+						"value": "if (datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"sensor_type\"] == \"adc2\") {\n\n    adc2 = parseInt(datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"response\"][\"result\"][\"raw\"], 16);\n    hexInt = parseInt(\"FFFF\", 16);\n\n    return parseFloat((adc2 % hexInt) / 32.0).toFixed(2);\n}",
+						"units": "cm",
+						"min_value": 0,
+						"max_value": "1000"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 5,
+				"3": 8
+			},
+			"col": {
+				"2": 2,
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Lux Meter",
+						"size": "regular",
+						"value": "if (datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"sensor_type\"] == \"lux\") {\n    ch0 = parseInt(datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"response\"][\"result\"][\"AmbientIR\"], 16);\n    ch1 = parseInt(datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"response\"][\"result\"][\"IR\"], 16);\n    \n    atime = 400.0  // 400 ms\n    again = 25.0   // gain = 25\n    TSL2591_LUX_DF = 408.0\n    TSL2591_LUX_COEFB = 1.64\n    TSL2591_LUX_COEFC = 0.59\n    TSL2591_LUX_COEFD = 0.86\n\n    cpl = (atime*again)/TSL2591_LUX_DF\n\n   \n    lux1 = (ch0-(TSL2591_LUX_COEFB * ch1))/cpl\n    lux2 = (TSL2591_LUX_COEFC*ch0 - TSL2591_LUX_COEFD*ch1)/cpl\n\n    if (lux1 != NaN && lux2 != NaN){\n        if (lux1 > lux2) return parseFloat(lux1).toFixed(2)\n        else return parseFloat(lux2).toFixed(2)        \n    }\n}",
+						"sparkline": true,
+						"animate": true,
+						"units": "lux"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 11,
+				"3": 8
+			},
+			"col": {
+				"2": 2,
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Thermopile",
+						"size": "regular",
+						"value": "if (datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"sensor_type\"] == \"thermopile\") {\n\n    thermopile_remote = parseInt(datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"response\"][\"result\"][\"object\"], 16);\n\n    // Raw data divided by 128 is the Celsius temperature value\n    return parseFloat(thermopile_remote / 128.0).toFixed(2);\n}",
+						"sparkline": true,
+						"animate": true,
+						"units": "C"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 12,
+				"3": 9,
+				"4": 8
+			},
+			"col": {
+				"2": 1,
+				"3": 3,
+				"4": 2
+			},
+			"col_width": "1",
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "Ultrasound Sensor 2",
+						"value": "if (datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"sensor_type\"] == \"adc3\") {\n\n    adc3 = parseInt(datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"response\"][\"result\"][\"raw\"], 16);\n    hexInt = parseInt(\"FFFF\", 16);\n\n    return parseFloat((adc3 % hexInt) / 32.0).toFixed(2);\n}",
+						"units": "cm",
+						"min_value": 0,
+						"max_value": "1000"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 16,
+				"3": 14,
+				"4": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 1,
+				"4": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Proximity Sensor",
+						"value": "if (datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"sensor_type\"] == \"digitalio\") {\n\n    dio = parseInt(datasources[\"a_demo_datasource\"][\"msg\"][\"state\"][\"response\"][\"result\"][\"raw\"], 16);\n    hexInt = parseInt(\"01\", 16);\n\n    return parseInt(dio & hexInt);\n}",
+						"on_text": "Object Detected",
+						"off_text": "No Object"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "a_demo_datasource",
+			"type": "paho_mqtt",
+			"settings": {
+				"server": "192.168.10.10",
+				"port": 9001,
+				"use_ssl": false,
+				"client_id": "",
+				"username": "",
+				"password": "",
+				"topic": "some/random/TOPIC",
+				"json_data": true
+			}
+		}
+	],
+	"columns": 3
+}
