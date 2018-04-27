@@ -1,4 +1,8 @@
 # freeboard_mqtt
+
+[![Docker Pulls](https://img.shields.io/docker/pulls/talmai/freeboard-mqtt.svg)](https://hub.docker.com/r/talmai/freeboard-mqtt/)
+[![Docker Stars](https://img.shields.io/docker/stars/talmai/freeboard-mqtt.svg)](https://hub.docker.com/r/talmai/freeboard-mqtt/)
+
 Container responsible for running a freeboard instance with installed MQTT plugins
 
 ### Quick summary ###
