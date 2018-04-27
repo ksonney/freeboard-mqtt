@@ -1,6 +1,5 @@
 # Pull base image
 FROM node:4
-MAINTAINER Talmai Oliveira <to@talm.ai>
 
 RUN apt update && apt upgrade -y && \
 	cd /root && \
