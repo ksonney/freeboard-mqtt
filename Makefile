@@ -12,5 +12,4 @@ run: build
 
 push:
 	docker buildx build --push --platform linux/aarch64,linux/arm64/v8,linux/amd64 -t $(DOCKER_IMAGE_TAGNAME) .
-	docker tag $(DOCKER_IMAGE_TAGNAME) $(DOCKER_IMAGE_NAME):latest
-	docker push $(DOCKER_IMAGE_NAME):latest
+	docker buildx build --push --platform linux/aarch64,linux/arm64/v8,linux/amd64 -t $(DOCKER_IMAGE_NAME):latest .
