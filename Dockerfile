@@ -2,7 +2,7 @@
 FROM node:latest
 
 RUN apt update && apt upgrade -y
-RUN apt install python wget vim
+RUN apt install -y python3 wget vim
 RUN cd /root && \
 git clone https://github.com/Freeboard/freeboard.git && \
 cd freeboard && \
