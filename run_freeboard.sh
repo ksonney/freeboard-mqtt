@@ -14,4 +14,4 @@ echo "<meta http-equiv='refresh' content='1; url=http://$HOST:$PORT/index-dev.ht
 echo "<meta charset='UTF-8'>" | cat - /root/freeboard/$CURRENT_PAGE > /root/freeboard/temp && mv /root/freeboard/temp /root/freeboard/$CURRENT_PAGE
 echo "<!DOCTYPE HTML>" | cat - /root/freeboard/$CURRENT_PAGE > /root/freeboard/temp && mv /root/freeboard/temp /root/freeboard/$CURRENT_PAGE
 
-/usr/bin/python -m http.server 8080
+/usr/bin/python3 -m http.server 8080
