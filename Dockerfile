@@ -14,8 +14,9 @@ mkdir mqtt && \
 cd mqtt && \
 wget --output-document mqttws31.js https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js
 
-RUN cd /root/freeboard/plugins/thirdparty/ && \
-git clone https://github.com/alsm/freeboard-mqtt.git
+RUN cd /root && \
+git clone https://github.com/alsm/freeboard-mqtt.git && \
+	cp freeboard-mqtt/*.js /root/freeboard/plugins/thirdparty/
 
 COPY *.json /root/freeboard/
 COPY *.html /root/freeboard/
