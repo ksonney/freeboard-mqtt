@@ -19,7 +19,7 @@ git clone https://github.com/alsm/freeboard-mqtt.git && \
 	cp freeboard-mqtt/*.js /root/freeboard/plugins/thirdparty/
 
 COPY *.json /root/freeboard/
-COPY *.html /root/freeboard/
+# COPY *.html /root/freeboard/
 
 RUN mkdir /freeboard_startup
 COPY run_freeboard.sh /freeboard_startup/
