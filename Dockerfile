@@ -2,12 +2,18 @@
 FROM node:latest
 
 RUN apt update && apt upgrade -y
-RUN apt install -y python3 wget vim
+RUN apt install -y python3 wget vim less
 RUN cd /root && \
 git clone https://github.com/Freeboard/freeboard.git && \
 cd freeboard && \
 npm install && \
-npm install paho-mqtt
+npm install paho-mqtt && \
+npm install -g grunt && \
+grunt
+
+RUN cd /root/freeboard && \
+sed -ie '/^        head.js("js\/freeboard_plugins.min.js",/a         "plugins/thirdparty/clearobject.mqtt.plugin.js",' index.html && \
+sed -ie '/^        head.js("js\/freeboard_plugins.min.js",/a         "plugins/thirdparty/paho.mqtt.plugin.js",' index.html
 
 RUN cd /root/freeboard/plugins/ && \
 mkdir mqtt && \
